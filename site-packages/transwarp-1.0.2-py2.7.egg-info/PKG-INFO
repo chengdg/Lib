@@ -1,0 +1,31 @@
+Metadata-Version: 1.1
+Name: transwarp
+Version: 1.0.2
+Summary: Transwarp web framework
+Home-page: https://github.com/michaelliao/transwarp
+Author: Michael Liao
+Author-email: askxuefeng@gmail.com
+License: Apache License
+Download-URL: https://github.com/michaelliao/transwarp
+Description: Transwarp is a web framework compatible with WSGI, also comes with 
+        a lightweight database access module, a mail sender, a task queue 
+        and utils like url fetch.
+        
+        This package was originally written by Michael Liao. You can find 
+        docs and source code at:
+        
+        http://michaelliao.github.com/transwarp/
+        
+        Please report bugs or any suggestions at:
+        
+        https://github.com/michaelliao/transwarp/
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

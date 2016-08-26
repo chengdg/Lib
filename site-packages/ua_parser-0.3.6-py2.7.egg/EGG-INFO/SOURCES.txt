@@ -1,0 +1,14 @@
+MANIFEST.in
+regexes.yaml
+setup.cfg
+setup.py
+py/ua_parser/__init__.py
+py/ua_parser/regexes.json
+py/ua_parser/regexes.yaml
+py/ua_parser/user_agent_parser.py
+py/ua_parser/user_agent_parser_test.py
+py/ua_parser.egg-info/PKG-INFO
+py/ua_parser.egg-info/SOURCES.txt
+py/ua_parser.egg-info/dependency_links.txt
+py/ua_parser.egg-info/not-zip-safe
+py/ua_parser.egg-info/top_level.txt

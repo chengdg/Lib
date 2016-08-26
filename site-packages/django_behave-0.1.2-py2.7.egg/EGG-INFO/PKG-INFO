@@ -1,0 +1,16 @@
+Metadata-Version: 1.1
+Name: django-behave
+Version: 0.1.2
+Summary: Django Test Runner for the Behave BDD module
+Home-page: https://github.com/rwillmer/django-behave
+Author: Rachel Willmer
+Author-email: rachel@willmer.org
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Framework :: Django
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Topic :: Software Development :: Testing

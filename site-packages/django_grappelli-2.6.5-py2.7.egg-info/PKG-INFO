@@ -1,0 +1,63 @@
+Metadata-Version: 1.1
+Name: django-grappelli
+Version: 2.6.5
+Summary: A jazzy skin for the Django Admin-Interface.
+Home-page: http://django-grappelli.readthedocs.org
+Author: Patrick Kranzlmueller, Axel Swoboda (vonautomatisch)
+Author-email: office@vonautomatisch.at
+License: BSD
+Description: Django Grappelli
+        ================
+        
+        **A jazzy skin for the Django admin interface**.
+        
+        Grappelli is a grid-based alternative/extension to the `Django <http://www.djangoproject.com>`_ administration interface.
+        
+        Code
+        ----
+        
+        https://github.com/sehmaschine/django-grappelli
+        
+        Website
+        -------
+        
+        http://www.grappelliproject.com
+        
+        Documentation
+        -------------
+        
+        http://readthedocs.org/docs/django-grappelli/
+        
+        Releases
+        --------
+        
+        **Grappelli is always developed against the latest stable Django release and is NOT tested with Djangos trunk.**
+        
+        * Grappelli 2.6.5 (May 28th, 2015): Compatible with Django 1.7
+        * Grappelli 2.5.7 (March 27th, 2015): Compatible with Django 1.6
+        * Grappelli 2.4.12 (November 14th, 2014): Compatible with Django 1.4/1.5
+        
+        Current development branches:
+        
+        * Grappelli 2.6.6 (Development version for Django 1.7, see branch Stable/2.6.x)
+        * Grappelli 2.5.8 (Development version for Django 1.6, see branch Stable/2.5.x)
+        * Grappelli 2.4.13 (Development version for Django 1.4/1.5, see branch Stable/2.4.x)
+        
+        Older versions are available at GitHub, but are not supported anymore.
+        Support for 2.4.x, 2.5.x and 2.6.x is limited to security issues and very important bugfixes.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.1
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3

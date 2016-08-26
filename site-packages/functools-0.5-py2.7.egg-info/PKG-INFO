@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: functools
+Version: 0.5
+Summary: Fast tools for functional programming
+Home-page: http://www.trit.org/~dima/
+Author: Dima Dorfman
+Author-email: dima+pyext@trit.org
+License: BSD
+Description: UNKNOWN
+Platform: UNKNOWN
