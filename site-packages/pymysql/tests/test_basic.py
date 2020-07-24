@@ -172,7 +172,7 @@ class TestCursor(base.PyMySQLTestCase):
     #         ('Create_tmp_table_priv', 254, 1, 1, 1, 0, 0),
     #         ('Lock_tables_priv', 254, 1, 1, 1, 0, 0),
     #         ('Execute_priv', 254, 1, 1, 1, 0, 0),
-    #         ('Repl_slave_priv', 254, 1, 1, 1, 0, 0),
+    #         ('Repl_subordinate_priv', 254, 1, 1, 1, 0, 0),
     #         ('Repl_client_priv', 254, 1, 1, 1, 0, 0),
     #         ('Create_view_priv', 254, 1, 1, 1, 0, 0),
     #         ('Show_view_priv', 254, 1, 1, 1, 0, 0),

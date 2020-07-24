@@ -406,7 +406,7 @@ class Client(RequestFactory):
 
     def request(self, **request):
         """
-        The master request method. Composes the environment dictionary
+        The main request method. Composes the environment dictionary
         and passes to the handler, returning the result of the handler.
         Assumes defaults for the query environment, which can be overridden
         using the arguments to the request.

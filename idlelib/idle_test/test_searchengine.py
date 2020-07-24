@@ -67,7 +67,7 @@ class GetSelectionTest(unittest.TestCase):
 ##        del cls.root
 
     def test_get_selection(self):
-        # text = Text(master=self.root)
+        # text = Text(main=self.root)
         text = mockText()
         text.insert('1.0',  'Hello World!')
 
@@ -204,7 +204,7 @@ class SearchTest(unittest.TestCase):
     def setUpClass(cls):
 ##        requires('gui')
 ##        cls.root = Tk()
-##        cls.text = Text(master=cls.root)
+##        cls.text = Text(main=cls.root)
         cls.text = mockText()
         test_text = (
             'First line\n'
@@ -270,7 +270,7 @@ class ForwardBackwardTest(unittest.TestCase):
         cls.engine = se.SearchEngine(None)
 ##        requires('gui')
 ##        cls.root = Tk()
-##        cls.text = Text(master=cls.root)
+##        cls.text = Text(main=cls.root)
         cls.text = mockText()
         # search_backward calls index('end-1c')
         cls.text.index = lambda index: '4.0'

@@ -592,7 +592,7 @@ By default, an object with no doctests doesn't create any tests:
 
 By default, that excluded objects with no doctests.  exclude_empty=False
 tells it to include (empty) tests for objects with no doctests.  This feature
-is really to support backward compatibility in what doctest.master.summarize()
+is really to support backward compatibility in what doctest.main.summarize()
 displays.
 
     >>> tests = doctest.DocTestFinder(exclude_empty=False).find(SampleClass)
@@ -2406,9 +2406,9 @@ We don't want `-v` in sys.argv for these tests.
        1 of   2 in test_doctest.txt
     ***Test Failed*** 1 failures.
     TestResults(failed=1, attempted=2)
-    >>> doctest.master = None  # Reset master.
+    >>> doctest.main = None  # Reset main.
 
-(Note: we'll be clearing doctest.master after each call to
+(Note: we'll be clearing doctest.main after each call to
 `doctest.testfile`, to suppress warnings about multiple tests with the
 same name.)
 
@@ -2417,7 +2417,7 @@ Globals may be specified with the `globs` and `extraglobs` parameters:
     >>> globs = {'favorite_color': 'blue'}
     >>> doctest.testfile('test_doctest.txt', globs=globs)
     TestResults(failed=0, attempted=2)
-    >>> doctest.master = None  # Reset master.
+    >>> doctest.main = None  # Reset main.
 
     >>> extraglobs = {'favorite_color': 'red'}
     >>> doctest.testfile('test_doctest.txt', globs=globs,
@@ -2435,7 +2435,7 @@ Globals may be specified with the `globs` and `extraglobs` parameters:
        1 of   2 in test_doctest.txt
     ***Test Failed*** 1 failures.
     TestResults(failed=1, attempted=2)
-    >>> doctest.master = None  # Reset master.
+    >>> doctest.main = None  # Reset main.
 
 The file may be made relative to a given module or package, using the
 optional `module_relative` parameter:
@@ -2443,7 +2443,7 @@ optional `module_relative` parameter:
     >>> doctest.testfile('test_doctest.txt', globs=globs,
     ...                  module_relative='test')
     TestResults(failed=0, attempted=2)
-    >>> doctest.master = None  # Reset master.
+    >>> doctest.main = None  # Reset main.
 
 Verbosity can be increased with the optional `verbose` parameter:
 
@@ -2469,7 +2469,7 @@ Verbosity can be increased with the optional `verbose` parameter:
     2 passed and 0 failed.
     Test passed.
     TestResults(failed=0, attempted=2)
-    >>> doctest.master = None  # Reset master.
+    >>> doctest.main = None  # Reset main.
 
 The name of the test may be specified with the optional `name`
 parameter:
@@ -2480,7 +2480,7 @@ parameter:
     File "...", line 6, in newname
     ...
     TestResults(failed=1, attempted=2)
-    >>> doctest.master = None  # Reset master.
+    >>> doctest.main = None  # Reset main.
 
 The summary report may be suppressed with the optional `report`
 parameter:
@@ -2495,7 +2495,7 @@ parameter:
         ...
         NameError: name 'favorite_color' is not defined
     TestResults(failed=1, attempted=2)
-    >>> doctest.master = None  # Reset master.
+    >>> doctest.main = None  # Reset main.
 
 The optional keyword argument `raise_on_error` can be used to raise an
 exception on the first error (which may be useful for postmortem
@@ -2505,7 +2505,7 @@ debugging):
     ... # doctest: +ELLIPSIS
     Traceback (most recent call last):
     UnexpectedException: ...
-    >>> doctest.master = None  # Reset master.
+    >>> doctest.main = None  # Reset main.
 
 If the tests contain non-ASCII characters, the tests might fail, since
 it's unknown which encoding is used. The encoding can be specified
@@ -2527,11 +2527,11 @@ using the optional keyword argument `encoding`:
        2 of   4 in test_doctest4.txt
     ***Test Failed*** 2 failures.
     TestResults(failed=2, attempted=4)
-    >>> doctest.master = None  # Reset master.
+    >>> doctest.main = None  # Reset main.
 
     >>> doctest.testfile('test_doctest4.txt', encoding='utf-8')
     TestResults(failed=0, attempted=4)
-    >>> doctest.master = None  # Reset master.
+    >>> doctest.main = None  # Reset main.
 
 Switch the module encoding to 'utf-8' to test the verbose output without
 bothering with the current sys.stdout encoding.
@@ -2565,7 +2565,7 @@ bothering with the current sys.stdout encoding.
     Test passed.
     TestResults(failed=0, attempted=4)
     >>> doctest._encoding = saved_encoding
-    >>> doctest.master = None  # Reset master.
+    >>> doctest.main = None  # Reset main.
     >>> sys.argv = save_argv
 """
 

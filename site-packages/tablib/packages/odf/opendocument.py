@@ -60,7 +60,7 @@ odmimetypes = {
  'application/vnd.oasis.opendocument.image-template':        '.oti',
  'application/vnd.oasis.opendocument.formula':               '.odf',
  'application/vnd.oasis.opendocument.formula-template':      '.otf',
- 'application/vnd.oasis.opendocument.text-master':           '.odm',
+ 'application/vnd.oasis.opendocument.text-main':           '.odm',
  'application/vnd.oasis.opendocument.text-web':              '.oth',
 }
 
@@ -104,8 +104,8 @@ class OpenDocument:
         self.topnode.addElement(self.styles)
         self.automaticstyles = AutomaticStyles()
         self.topnode.addElement(self.automaticstyles)
-        self.masterstyles = MasterStyles()
-        self.topnode.addElement(self.masterstyles)
+        self.mainstyles = MainStyles()
+        self.topnode.addElement(self.mainstyles)
         self.body = Body()
         self.topnode.addElement(self.body)
 
@@ -135,7 +135,7 @@ class OpenDocument:
 
     def __register_stylename(self, element):
         ''' Register a style. But there are three style dictionaries:
-            office:styles, office:automatic-styles and office:master-styles
+            office:styles, office:automatic-styles and office:main-styles
             Chapter 14
         '''
         name = element.getAttrNS(STYLENS, u'name')
@@ -226,7 +226,7 @@ class OpenDocument:
         return xml.getvalue()
 
     def _parseoneelement(self, top, stylenamelist):
-        """ Finds references to style objects in master-styles
+        """ Finds references to style objects in main-styles
             and add the style name to the style list if not already there.
             Recursive
         """
@@ -250,7 +250,7 @@ class OpenDocument:
         return stylenamelist
 
     def _used_auto_styles(self, segments):
-        """ Loop through the masterstyles elements, and find the automatic
+        """ Loop through the mainstyles elements, and find the automatic
             styles that are used. These will be added to the automatic-styles
             element in styles.xml
         """
@@ -274,11 +274,11 @@ class OpenDocument:
         self.styles.toXml(1, xml)
         a = AutomaticStyles()
         a.write_open_tag(1, xml)
-        for s in self._used_auto_styles([self.masterstyles]):
+        for s in self._used_auto_styles([self.mainstyles]):
             s.toXml(2, xml)
         a.write_close_tag(1, xml)
-        if self.masterstyles.hasChildNodes():
-            self.masterstyles.toXml(1, xml)
+        if self.mainstyles.hasChildNodes():
+            self.mainstyles.toXml(1, xml)
         x.write_close_tag(0, xml)
         return xml.getvalue()
 
@@ -571,9 +571,9 @@ def OpenDocumentText():
     doc.body.addElement(doc.text)
     return doc
 
-def OpenDocumentTextMaster():
-    """ Creates a text master document """
-    doc = OpenDocument('application/vnd.oasis.opendocument.text-master')
+def OpenDocumentTextMain():
+    """ Creates a text main document """
+    doc = OpenDocument('application/vnd.oasis.opendocument.text-main')
     doc.text = Text()
     doc.body.addElement(doc.text)
     return doc

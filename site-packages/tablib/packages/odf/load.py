@@ -38,7 +38,7 @@ class LoadParser(handler.ContentHandler):
     """ Extract headings from content.xml of an ODT file """
     triggers = (
        (OFFICENS, 'automatic-styles'), (OFFICENS, 'body'),
-       (OFFICENS, 'font-face-decls'), (OFFICENS, 'master-styles'),
+       (OFFICENS, 'font-face-decls'), (OFFICENS, 'main-styles'),
        (OFFICENS, 'meta'), (OFFICENS, 'scripts'),
        (OFFICENS, 'settings'), (OFFICENS, 'styles') )
 
@@ -81,8 +81,8 @@ class LoadParser(handler.ContentHandler):
             e = self.doc.automaticstyles
         elif tag == (OFFICENS, 'body'):
             e = self.doc.body
-        elif tag == (OFFICENS, 'master-styles'):
-            e = self.doc.masterstyles
+        elif tag == (OFFICENS, 'main-styles'):
+            e = self.doc.mainstyles
         elif tag == (OFFICENS, 'meta'):
             e = self.doc.meta
         elif tag == (OFFICENS,'scripts'):

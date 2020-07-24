@@ -100,7 +100,7 @@ class Git(VersionControl):
     def update(self, dest, rev_options):
         # First fetch changes from the default remote
         self.run_command(['fetch', '-q'], cwd=dest)
-        # Then reset to wanted revision (maybe even origin/master)
+        # Then reset to wanted revision (maybe even origin/main)
         if rev_options:
             rev_options = self.check_rev_options(
                 rev_options[0], dest, rev_options,
@@ -115,7 +115,7 @@ class Git(VersionControl):
             rev_options = [rev]
             rev_display = ' (to %s)' % rev
         else:
-            rev_options = ['origin/master']
+            rev_options = ['origin/main']
             rev_display = ''
         if self.check_destination(dest, url, rev_options, rev_display):
             logger.info(

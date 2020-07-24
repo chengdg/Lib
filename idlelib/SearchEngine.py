@@ -98,7 +98,7 @@ class SearchEngine:
         if col >= 0:
             msg = msg + "\nOffset: " + str(col)
         tkMessageBox.showerror("Regular expression error",
-                               msg, master=self.root)
+                               msg, main=self.root)
 
     def search_text(self, text, prog=None, ok=0):
         '''Return (lineno, matchobj) or None for forward/backward search.

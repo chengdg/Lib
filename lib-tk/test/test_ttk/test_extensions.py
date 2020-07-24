@@ -47,24 +47,24 @@ class LabeledScaleTest(AbstractTkTest, unittest.TestCase):
             self.assertNotEqual(sys.last_type, tkinter.TclError)
 
 
-    def test_initialization_no_master(self):
-        # no master passing
+    def test_initialization_no_main(self):
+        # no main passing
         with swap_attr(tkinter, '_default_root', None), \
              swap_attr(tkinter, '_support_default_root', True):
             try:
                 x = ttk.LabeledScale()
                 self.assertIsNotNone(tkinter._default_root)
-                self.assertEqual(x.master, tkinter._default_root)
+                self.assertEqual(x.main, tkinter._default_root)
                 self.assertEqual(x.tk, tkinter._default_root.tk)
                 x.destroy()
             finally:
                 destroy_default_root()
 
     def test_initialization(self):
-        # master passing
-        master = tkinter.Frame(self.root)
-        x = ttk.LabeledScale(master)
-        self.assertEqual(x.master, master)
+        # main passing
+        main = tkinter.Frame(self.root)
+        x = ttk.LabeledScale(main)
+        self.assertEqual(x.main, main)
         x.destroy()
 
         # variable initialization/passing
@@ -112,7 +112,7 @@ class LabeledScaleTest(AbstractTkTest, unittest.TestCase):
         x.destroy()
 
         # extra, and invalid, kwargs
-        self.assertRaises(tkinter.TclError, ttk.LabeledScale, master, a='b')
+        self.assertRaises(tkinter.TclError, ttk.LabeledScale, main, a='b')
 
 
     def test_horizontal_range(self):
@@ -183,17 +183,17 @@ class LabeledScaleTest(AbstractTkTest, unittest.TestCase):
         x.wait_visibility()
         x.update()
 
-        width, height = x.master.winfo_width(), x.master.winfo_height()
+        width, height = x.main.winfo_width(), x.main.winfo_height()
         width_new, height_new = width * 2, height * 2
 
         x.value = 3
         x.update()
-        x.master.wm_geometry("%dx%d" % (width_new, height_new))
+        x.main.wm_geometry("%dx%d" % (width_new, height_new))
         self.assertEqual(int(x.label.place_info()['x']),
             x.scale.coords()[0])
 
         # Reset geometry
-        x.master.wm_geometry("%dx%d" % (width, height))
+        x.main.wm_geometry("%dx%d" % (width, height))
         x.destroy()
 
 

@@ -54,7 +54,7 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
         # Skip the sqlite_sequence system table used for autoincrement key
         # generation.
         cursor.execute("""
-            SELECT name FROM sqlite_master
+            SELECT name FROM sqlite_main
             WHERE type='table' AND NOT name='sqlite_sequence'
             ORDER BY name""")
         return [row[0] for row in cursor.fetchall()]
@@ -74,7 +74,7 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
         relations = {}
 
         # Schema for this table
-        cursor.execute("SELECT sql FROM sqlite_master WHERE tbl_name = %s AND type = %s", [table_name, "table"])
+        cursor.execute("SELECT sql FROM sqlite_main WHERE tbl_name = %s AND type = %s", [table_name, "table"])
         results = cursor.fetchone()[0].strip()
         results = results[results.index('(')+1:results.rindex(')')]
 
@@ -92,7 +92,7 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
 
             table, column = [s.strip('"') for s in m.groups()]
 
-            cursor.execute("SELECT sql FROM sqlite_master WHERE tbl_name = %s", [table])
+            cursor.execute("SELECT sql FROM sqlite_main WHERE tbl_name = %s", [table])
             result = cursor.fetchall()[0]
             other_table_results = result[0].strip()
             li, ri = other_table_results.index('('), other_table_results.rindex(')')
@@ -119,7 +119,7 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
         key_columns = []
 
         # Schema for this table
-        cursor.execute("SELECT sql FROM sqlite_master WHERE tbl_name = %s AND type = %s", [table_name, "table"])
+        cursor.execute("SELECT sql FROM sqlite_main WHERE tbl_name = %s AND type = %s", [table_name, "table"])
         results = cursor.fetchone()[0].strip()
         results = results[results.index('(')+1:results.rindex(')')]
 
@@ -164,7 +164,7 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
         Get the column name of the primary key for the given table.
         """
         # Don't use PRAGMA because that causes issues with some transactions
-        cursor.execute("SELECT sql FROM sqlite_master WHERE tbl_name = %s AND type = %s", [table_name, "table"])
+        cursor.execute("SELECT sql FROM sqlite_main WHERE tbl_name = %s AND type = %s", [table_name, "table"])
         results = cursor.fetchone()[0].strip()
         results = results[results.index('(')+1:results.rindex(')')]
         for field_desc in results.split(','):

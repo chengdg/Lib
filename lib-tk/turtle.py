@@ -356,18 +356,18 @@ class ScrolledCanvas(TK.Frame):
     Used as the default canvas, which pops up automatically when
     using turtle graphics functions or the Turtle class.
     """
-    def __init__(self, master, width=500, height=350,
+    def __init__(self, main, width=500, height=350,
                                           canvwidth=600, canvheight=500):
-        TK.Frame.__init__(self, master, width=width, height=height)
+        TK.Frame.__init__(self, main, width=width, height=height)
         self._rootwindow = self.winfo_toplevel()
         self.width, self.height = width, height
         self.canvwidth, self.canvheight = canvwidth, canvheight
         self.bg = "white"
-        self._canvas = TK.Canvas(master, width=width, height=height,
+        self._canvas = TK.Canvas(main, width=width, height=height,
                                  bg=self.bg, relief=TK.SUNKEN, borderwidth=2)
-        self.hscroll = TK.Scrollbar(master, command=self._canvas.xview,
+        self.hscroll = TK.Scrollbar(main, command=self._canvas.xview,
                                     orient=TK.HORIZONTAL)
-        self.vscroll = TK.Scrollbar(master, command=self._canvas.yview)
+        self.vscroll = TK.Scrollbar(main, command=self._canvas.yview)
         self._canvas.configure(xscrollcommand=self.hscroll.set,
                                yscrollcommand=self.vscroll.set)
         self.rowconfigure(0, weight=1, minsize=0)

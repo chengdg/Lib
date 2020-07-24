@@ -205,7 +205,7 @@ class AbstractWidgetTest(AbstractTkTest):
                 errmsg=errmsg)
 
     def checkImageParam(self, widget, name):
-        image = tkinter.PhotoImage(master=self.root, name='image1')
+        image = tkinter.PhotoImage(main=self.root, name='image1')
         self.checkParam(widget, name, image, conv=str)
         self.checkInvalidParam(widget, name, 'spam',
                 errmsg='image "spam" doesn\'t exist')

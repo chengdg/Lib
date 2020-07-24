@@ -71,8 +71,8 @@ def FootnoteSep(**args):
 def GraphicProperties(**args):
     return Element(qname = (STYLENS,'graphic-properties'), **args)
 
-def HandoutMaster(**args):
-    return Element(qname = (STYLENS,'handout-master'), **args)
+def HandoutMain(**args):
+    return Element(qname = (STYLENS,'handout-main'), **args)
 
 def Header(**args):
     return Element(qname = (STYLENS,'header'), **args)
@@ -92,8 +92,8 @@ def ListLevelProperties(**args):
 def Map(**args):
     return Element(qname = (STYLENS,'map'), **args)
 
-def MasterPage(**args):
-    return StyleElement(qname = (STYLENS,'master-page'), **args)
+def MainPage(**args):
+    return StyleElement(qname = (STYLENS,'main-page'), **args)
 
 def PageLayout(**args):
     return Element(qname = (STYLENS,'page-layout'), **args)

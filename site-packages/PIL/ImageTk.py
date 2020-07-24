@@ -280,12 +280,12 @@ def getimage(photo):
 def _show(image, title):
 
     class UI(Tkinter.Label):
-        def __init__(self, master, im):
+        def __init__(self, main, im):
             if im.mode == "1":
-                self.image = BitmapImage(im, foreground="white", master=master)
+                self.image = BitmapImage(im, foreground="white", main=main)
             else:
-                self.image = PhotoImage(im, master=master)
-            Tkinter.Label.__init__(self, master, image=self.image,
+                self.image = PhotoImage(im, main=main)
+            Tkinter.Label.__init__(self, main, image=self.image,
                 bg="black", bd=0)
 
     if not Tkinter._default_root:

@@ -19,7 +19,7 @@ threading = test_support.import_module('threading')
 
 # the dummy data returned by server when LIST and RETR commands are issued
 LIST_RESP = '1 1\r\n2 2\r\n3 3\r\n4 4\r\n5 5\r\n.\r\n'
-RETR_RESP = """From: postmaster@python.org\
+RETR_RESP = """From: postmain@python.org\
 \r\nContent-Type: text/plain\r\n\
 MIME-Version: 1.0\r\n\
 Subject: Dummy\r\n\
@@ -192,7 +192,7 @@ class TestPOP3Class(TestCase):
 
     def test_retr(self):
         expected = ('+OK 116 bytes',
-                    ['From: postmaster@python.org', 'Content-Type: text/plain',
+                    ['From: postmain@python.org', 'Content-Type: text/plain',
                      'MIME-Version: 1.0', 'Subject: Dummy',
                      '', 'line1', 'line2', 'line3'],
                     113)
@@ -213,7 +213,7 @@ class TestPOP3Class(TestCase):
 
     def test_top(self):
         expected =  ('+OK 116 bytes',
-                     ['From: postmaster@python.org', 'Content-Type: text/plain',
+                     ['From: postmain@python.org', 'Content-Type: text/plain',
                       'MIME-Version: 1.0', 'Subject: Dummy', '',
                       'line1', 'line2', 'line3'],
                      113)

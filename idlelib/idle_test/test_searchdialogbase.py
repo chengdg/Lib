@@ -114,7 +114,7 @@ class SearchDialogBaseTest(unittest.TestCase):
                 var.set(state)
             frame, options = self.btn_test_setup(
                     self.dialog.create_option_buttons)
-            for spec, button in zip (options, frame.pack_slaves()):
+            for spec, button in zip (options, frame.pack_subordinates()):
                 var, label = spec
                 self.assertEqual(button['text'], label)
                 self.assertEqual(var.get(), state)
@@ -130,7 +130,7 @@ class SearchDialogBaseTest(unittest.TestCase):
             var.set(state)
             frame, others = self.btn_test_setup(
                 self.dialog.create_other_buttons)
-            buttons = frame.pack_slaves()
+            buttons = frame.pack_subordinates()
             for spec, button in zip(others, buttons):
                 val, label = spec
                 self.assertEqual(button['text'], label)

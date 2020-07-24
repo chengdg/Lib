@@ -159,8 +159,8 @@ class LabelFrameTest(AbstractToplevelTest, unittest.TestCase):
 class AbstractLabelTest(AbstractWidgetTest):
 
     def checkImageParam(self, widget, name):
-        image = tkinter.PhotoImage(master=self.root, name='image1')
-        image2 = tkinter.PhotoImage(master=self.root, name='image2')
+        image = tkinter.PhotoImage(main=self.root, name='image1')
+        image2 = tkinter.PhotoImage(main=self.root, name='image2')
         self.checkParam(widget, name, image, expected=('image1',))
         self.checkParam(widget, name, 'image1', expected=('image1',))
         self.checkParam(widget, name, (image,), expected=('image1',))
@@ -1373,9 +1373,9 @@ class TreeviewTest(AbstractWidgetTest, unittest.TestCase):
                 "invoked.")
 
         success = []
-        commands = self.tv.master._tclCommands
+        commands = self.tv.main._tclCommands
         self.tv.heading('#0', command=str(self.tv.heading('#0', command=None)))
-        self.assertEqual(commands, self.tv.master._tclCommands)
+        self.assertEqual(commands, self.tv.main._tclCommands)
         simulate_heading_click(5, 5)
         if not success:
             self.fail("The command associated to the treeview heading wasn't "

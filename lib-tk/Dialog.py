@@ -10,10 +10,10 @@ else:
 
 
 class Dialog(Widget):
-    def __init__(self, master=None, cnf={}, **kw):
+    def __init__(self, main=None, cnf={}, **kw):
         cnf = _cnfmerge((cnf, kw))
         self.widgetName = '__dialog__'
-        Widget._setup(self, master, cnf)
+        Widget._setup(self, main, cnf)
         self.num = self.tk.getint(
                 self.tk.call(
                       'tk_dialog', self._w,

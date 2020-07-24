@@ -321,14 +321,14 @@ class Debugger:
 
 class StackViewer(ScrolledList):
 
-    def __init__(self, master, flist, gui):
+    def __init__(self, main, flist, gui):
         if macosxSupport.isAquaTk():
             # At least on with the stock AquaTk version on OSX 10.4 you'll
             # get an shaking GUI that eventually kills IDLE if the width
             # argument is specified.
-            ScrolledList.__init__(self, master)
+            ScrolledList.__init__(self, main)
         else:
-            ScrolledList.__init__(self, master, width=80)
+            ScrolledList.__init__(self, main, width=80)
         self.flist = flist
         self.gui = gui
         self.stack = []
@@ -405,18 +405,18 @@ class StackViewer(ScrolledList):
 
 class NamespaceViewer:
 
-    def __init__(self, master, title, dict=None):
+    def __init__(self, main, title, dict=None):
         width = 0
         height = 40
         if dict:
             height = 20*len(dict) # XXX 20 == observed height of Entry widget
-        self.master = master
+        self.main = main
         self.title = title
         import repr
         self.repr = repr.Repr()
         self.repr.maxstring = 60
         self.repr.maxother = 60
-        self.frame = frame = Frame(master)
+        self.frame = frame = Frame(main)
         self.frame.pack(expand=1, fill="both")
         self.label = Label(frame, text=title, borderwidth=2, relief="groove")
         self.label.pack(fill="x")

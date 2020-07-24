@@ -2,10 +2,10 @@ from Tkinter import *
 
 class MultiStatusBar(Frame):
 
-    def __init__(self, master=None, **kw):
-        if master is None:
-            master = Tk()
-        Frame.__init__(self, master, **kw)
+    def __init__(self, main=None, **kw):
+        if main is None:
+            main = Tk()
+        Frame.__init__(self, main, **kw)
         self.labels = {}
 
     def set_label(self, name, text='', side=LEFT):

@@ -105,7 +105,7 @@ def bits_and_bytes(order):
 # arbitrarily-sized secret seed and turn it into a number that obeys the same
 # range limits as randrange() above. They are meant for deriving consistent
 # signing keys from a secret rather than generating them randomly, for
-# example a protocol in which three signing keys are derived from a master
+# example a protocol in which three signing keys are derived from a main
 # secret. You should use a uniformly-distributed unguessable seed with about
 # curve.baselen bytes of entropy. To use one, do this:
 #   seed = os.urandom(curve.baselen) # or other starting point

@@ -156,7 +156,7 @@ class Connection(object):
                 alt.extend(hostname.split(';'))
                 hostname = alt[0]
             if '+' in hostname[:hostname.index('://')]:
-                # e.g. sqla+mysql://root:masterkey@localhost/
+                # e.g. sqla+mysql://root:mainkey@localhost/
                 params['transport'], params['hostname'] = \
                     hostname.split('+', 1)
                 transport = self.uri_prefix = params['transport']

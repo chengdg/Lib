@@ -262,7 +262,7 @@ def main(tests=None, testdir=None, verbose=0, quiet=False,
              'exclude', 'single', 'slow', 'randomize', 'fromfile=', 'findleaks',
              'use=', 'threshold=', 'trace', 'coverdir=', 'nocoverdir',
              'runleaks', 'huntrleaks=', 'memlimit=', 'randseed=',
-             'multiprocess=', 'slaveargs=', 'forever', 'header'])
+             'multiprocess=', 'subordinateargs=', 'forever', 'header'])
     except getopt.error, msg:
         usage(2, msg)
 
@@ -348,7 +348,7 @@ def main(tests=None, testdir=None, verbose=0, quiet=False,
             use_mp = int(a)
         elif o == '--header':
             header = True
-        elif o == '--slaveargs':
+        elif o == '--subordinateargs':
             args, kwargs = json.loads(a)
             try:
                 result = runtest(*args, **kwargs)
@@ -512,7 +512,7 @@ def main(tests=None, testdir=None, verbose=0, quiet=False,
                         output.put((None, None, None, None))
                         return
                     # -E is needed by some tests, e.g. test_import
-                    popen = Popen(base_cmd + ['--slaveargs', json.dumps(args_tuple)],
+                    popen = Popen(base_cmd + ['--subordinateargs', json.dumps(args_tuple)],
                                    stdout=PIPE, stderr=PIPE,
                                    universal_newlines=True,
                                    close_fds=(os.name != 'nt'))
@@ -1116,7 +1116,7 @@ def dash_R_cleanup(fs, ps, pic, zdc, abcs):
     mimetypes._default_mime_types()
     filecmp._cache.clear()
     struct._clearcache()
-    doctest.master = None
+    doctest.main = None
     try:
         import ctypes
     except ImportError:

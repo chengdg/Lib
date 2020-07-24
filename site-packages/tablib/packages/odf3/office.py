@@ -74,8 +74,8 @@ def Forms(**args):
 def Image(**args):
     return Element(qname = (OFFICENS,'image'), **args)
 
-def MasterStyles(**args):
-    return Element(qname = (OFFICENS, 'master-styles'), **args)
+def MainStyles(**args):
+    return Element(qname = (OFFICENS, 'main-styles'), **args)
 
 def Meta(**args):
     return Element(qname = (OFFICENS, 'meta'), **args)

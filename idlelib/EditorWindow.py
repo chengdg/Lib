@@ -1160,7 +1160,7 @@ class EditorWindow(object):
     def get_var_obj(self, name, vartype=None):
         var = self.tkinter_vars.get(name)
         if not var and vartype:
-            # create a Tkinter variable object with self.text as master:
+            # create a Tkinter variable object with self.text as main:
             self.tkinter_vars[name] = var = vartype(self.text)
         return var
 
@@ -1206,7 +1206,7 @@ class EditorWindow(object):
         text = self.text
         if self.get_tabwidth() != newtabwidth:
             pixels = text.tk.call("font", "measure", text["font"],
-                                  "-displayof", text.master,
+                                  "-displayof", text.main,
                                   "n" * newtabwidth)
             text.configure(tabs=pixels)
 
@@ -1711,7 +1711,7 @@ def fixwordbreaks(root):
 
 
 def _editor_window(parent):  # htest #
-    # error if close master window first - timer event, after script
+    # error if close main window first - timer event, after script
     root = parent
     fixwordbreaks(root)
     if sys.argv[1:]:

@@ -249,7 +249,7 @@ class CodeBlockProcessor(BlockProcessor):
             code.text = util.AtomicString('%s\n' % block.rstrip())
         if theRest:
             # This block contained unindented line(s) after the first indented
-            # line. Insert these lines as the first block of the master blocks
+            # line. Insert these lines as the first block of the main blocks
             # list for future processing.
             blocks.insert(0, theRest)
 
@@ -460,7 +460,7 @@ class SetextHeaderProcessor(BlockProcessor):
         h = util.etree.SubElement(parent, 'h%d' % level)
         h.text = lines[0].strip()
         if len(lines) > 2:
-            # Block contains additional lines. Add to  master blocks for later.
+            # Block contains additional lines. Add to  main blocks for later.
             blocks.insert(0, '\n'.join(lines[2:]))
 
 
@@ -494,7 +494,7 @@ class HRProcessor(BlockProcessor):
         # check for lines in block after hr.
         postlines = block[self.match.end():].lstrip('\n')
         if postlines:
-            # Add lines after hr to master blocks for later parsing.
+            # Add lines after hr to main blocks for later parsing.
             blocks.insert(0, postlines)
 
 
@@ -514,7 +514,7 @@ class EmptyBlockProcessor(BlockProcessor):
             # Save the rest for later.
             theRest = block[1:]
             if theRest:
-                # Add remaining lines to master blocks for later.
+                # Add remaining lines to main blocks for later.
                 blocks.insert(0, theRest)
         sibling = self.lastChild(parent)
         if (sibling is not None and sibling.tag == 'pre' and

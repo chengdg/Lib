@@ -28,7 +28,7 @@ class BitmapImageTest(AbstractTkTest, unittest.TestCase):
         cls.testfile = support.findfile('python.xbm', subdir='imghdrdata')
 
     def test_create_from_file(self):
-        image = tkinter.BitmapImage('::img::test', master=self.root,
+        image = tkinter.BitmapImage('::img::test', main=self.root,
                                     foreground='yellow', background='blue',
                                     file=self.testfile)
         self.assertEqual(str(image), '::img::test')
@@ -42,7 +42,7 @@ class BitmapImageTest(AbstractTkTest, unittest.TestCase):
     def test_create_from_data(self):
         with open(self.testfile, 'rb') as f:
             data = f.read()
-        image = tkinter.BitmapImage('::img::test', master=self.root,
+        image = tkinter.BitmapImage('::img::test', main=self.root,
                                     foreground='yellow', background='blue',
                                     data=data)
         self.assertEqual(str(image), '::img::test')
@@ -58,7 +58,7 @@ class BitmapImageTest(AbstractTkTest, unittest.TestCase):
         self.assertEqual(self.root.splitlist(actual), expected)
 
     def test_configure_data(self):
-        image = tkinter.BitmapImage('::img::test', master=self.root)
+        image = tkinter.BitmapImage('::img::test', main=self.root)
         self.assertEqual(image['data'], '-data {} {} {} {}')
         with open(self.testfile, 'rb') as f:
             data = f.read()
@@ -74,7 +74,7 @@ class BitmapImageTest(AbstractTkTest, unittest.TestCase):
                                 ('-maskdata', '', '', '', data))
 
     def test_configure_file(self):
-        image = tkinter.BitmapImage('::img::test', master=self.root)
+        image = tkinter.BitmapImage('::img::test', main=self.root)
         self.assertEqual(image['file'], '-file {} {} {} {}')
         image.configure(file=self.testfile)
         self.assertEqualStrList(image['file'],
@@ -88,13 +88,13 @@ class BitmapImageTest(AbstractTkTest, unittest.TestCase):
                                 ('-maskfile', '', '', '', self.testfile))
 
     def test_configure_background(self):
-        image = tkinter.BitmapImage('::img::test', master=self.root)
+        image = tkinter.BitmapImage('::img::test', main=self.root)
         self.assertEqual(image['background'], '-background {} {} {} {}')
         image.configure(background='blue')
         self.assertEqual(image['background'], '-background {} {} {} blue')
 
     def test_configure_foreground(self):
-        image = tkinter.BitmapImage('::img::test', master=self.root)
+        image = tkinter.BitmapImage('::img::test', main=self.root)
         self.assertEqual(image['foreground'],
                          '-foreground {} {} #000000 #000000')
         image.configure(foreground='yellow')
@@ -110,7 +110,7 @@ class PhotoImageTest(AbstractTkTest, unittest.TestCase):
         cls.testfile = support.findfile('python.gif', subdir='imghdrdata')
 
     def create(self):
-        return tkinter.PhotoImage('::img::test', master=self.root,
+        return tkinter.PhotoImage('::img::test', main=self.root,
                                   file=self.testfile)
 
     def colorlist(self, *args):
@@ -121,7 +121,7 @@ class PhotoImageTest(AbstractTkTest, unittest.TestCase):
 
     def check_create_from_file(self, ext):
         testfile = support.findfile('python.' + ext, subdir='imghdrdata')
-        image = tkinter.PhotoImage('::img::test', master=self.root,
+        image = tkinter.PhotoImage('::img::test', main=self.root,
                                    file=testfile)
         self.assertEqual(str(image), '::img::test')
         self.assertEqual(image.type(), 'photo')
@@ -137,7 +137,7 @@ class PhotoImageTest(AbstractTkTest, unittest.TestCase):
         testfile = support.findfile('python.' + ext, subdir='imghdrdata')
         with open(testfile, 'rb') as f:
             data = f.read()
-        image = tkinter.PhotoImage('::img::test', master=self.root,
+        image = tkinter.PhotoImage('::img::test', main=self.root,
                                    data=data)
         self.assertEqual(str(image), '::img::test')
         self.assertEqual(image.type(), 'photo')
@@ -177,7 +177,7 @@ class PhotoImageTest(AbstractTkTest, unittest.TestCase):
         self.check_create_from_data('png')
 
     def test_configure_data(self):
-        image = tkinter.PhotoImage('::img::test', master=self.root)
+        image = tkinter.PhotoImage('::img::test', main=self.root)
         self.assertEqual(image['data'], '')
         with open(self.testfile, 'rb') as f:
             data = f.read()
@@ -188,7 +188,7 @@ class PhotoImageTest(AbstractTkTest, unittest.TestCase):
         self.assertEqual(image.height(), 16)
 
     def test_configure_format(self):
-        image = tkinter.PhotoImage('::img::test', master=self.root)
+        image = tkinter.PhotoImage('::img::test', main=self.root)
         self.assertEqual(image['format'], '')
         image.configure(file=self.testfile, format='gif')
         self.assertEqual(image['format'], ('gif',) if self.wantobjects
@@ -197,7 +197,7 @@ class PhotoImageTest(AbstractTkTest, unittest.TestCase):
         self.assertEqual(image.height(), 16)
 
     def test_configure_file(self):
-        image = tkinter.PhotoImage('::img::test', master=self.root)
+        image = tkinter.PhotoImage('::img::test', main=self.root)
         self.assertEqual(image['file'], '')
         image.configure(file=self.testfile)
         self.assertEqual(image['file'], self.testfile)
@@ -205,13 +205,13 @@ class PhotoImageTest(AbstractTkTest, unittest.TestCase):
         self.assertEqual(image.height(), 16)
 
     def test_configure_gamma(self):
-        image = tkinter.PhotoImage('::img::test', master=self.root)
+        image = tkinter.PhotoImage('::img::test', main=self.root)
         self.assertEqual(image['gamma'], '1.0')
         image.configure(gamma=2.0)
         self.assertEqual(image['gamma'], '2.0')
 
     def test_configure_width_height(self):
-        image = tkinter.PhotoImage('::img::test', master=self.root)
+        image = tkinter.PhotoImage('::img::test', main=self.root)
         self.assertEqual(image['width'], '0')
         self.assertEqual(image['height'], '0')
         image.configure(width=20)
@@ -222,7 +222,7 @@ class PhotoImageTest(AbstractTkTest, unittest.TestCase):
         self.assertEqual(image.height(), 10)
 
     def test_configure_palette(self):
-        image = tkinter.PhotoImage('::img::test', master=self.root)
+        image = tkinter.PhotoImage('::img::test', main=self.root)
         self.assertEqual(image['palette'], '')
         image.configure(palette=256)
         self.assertEqual(image['palette'], '256')
@@ -300,7 +300,7 @@ class PhotoImageTest(AbstractTkTest, unittest.TestCase):
         self.addCleanup(support.unlink, support.TESTFN)
 
         image.write(support.TESTFN)
-        image2 = tkinter.PhotoImage('::img::test2', master=self.root,
+        image2 = tkinter.PhotoImage('::img::test2', main=self.root,
                                     format='ppm',
                                     file=support.TESTFN)
         self.assertEqual(str(image2), '::img::test2')
@@ -311,7 +311,7 @@ class PhotoImageTest(AbstractTkTest, unittest.TestCase):
         self.assertEqual(image2.get(15, 8), image.get(15, 8))
 
         image.write(support.TESTFN, format='gif', from_coords=(4, 6, 6, 9))
-        image3 = tkinter.PhotoImage('::img::test3', master=self.root,
+        image3 = tkinter.PhotoImage('::img::test3', main=self.root,
                                     format='gif',
                                     file=support.TESTFN)
         self.assertEqual(str(image3), '::img::test3')

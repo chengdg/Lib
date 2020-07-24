@@ -534,11 +534,11 @@ class SimpleTableParser(TableParser):
                 self.table[first_body_row:])
 
 
-def update_dict_of_lists(master, newdata):
+def update_dict_of_lists(main, newdata):
     """
-    Extend the list values of `master` with those from `newdata`.
+    Extend the list values of `main` with those from `newdata`.
 
     Both parameters must be dictionaries containing list values.
     """
     for key, values in newdata.items():
-        master.setdefault(key, []).extend(values)
+        main.setdefault(key, []).extend(values)

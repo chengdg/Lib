@@ -107,7 +107,7 @@ include_dirs = /usr/X11R6/include
 
 Authors:
   Pearu Peterson <pearu@cens.ioc.ee>, February 2002
-  David M. Cooke <cookedm@physics.mcmaster.ca>, April 2002
+  David M. Cooke <cookedm@physics.mcmain.ca>, April 2002
 
 Copyright 2002 Pearu Peterson all rights reserved,
 Pearu Peterson <pearu@cens.ioc.ee>

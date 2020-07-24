@@ -363,7 +363,7 @@ class ODF2XHTML(handler.ContentHandler):
         (OFFICENS, "document"):(self.s_office_document_content, self.e_office_document_content),
         (OFFICENS, "document-content"):(self.s_office_document_content, self.e_office_document_content),
         (OFFICENS, "forms"):(self.s_ignorexml, None),
-        (OFFICENS, "master-styles"):(self.s_office_master_styles, None),
+        (OFFICENS, "main-styles"):(self.s_office_main_styles, None),
         (OFFICENS, "meta"):(self.s_ignorecont, None),
         (OFFICENS, "presentation"):(self.s_office_presentation, self.e_office_presentation),
         (OFFICENS, "spreadsheet"):(self.s_office_spreadsheet, self.e_office_spreadsheet),
@@ -380,11 +380,11 @@ class ODF2XHTML(handler.ContentHandler):
 #       (STYLENS, "footer"):(self.s_style_footer, self.e_style_footer),
 #       (STYLENS, "footer-style"):(self.s_style_footer_style, None),
         (STYLENS, "graphic-properties"):(self.s_style_handle_properties, None),
-        (STYLENS, "handout-master"):(self.s_ignorexml, None),
+        (STYLENS, "handout-main"):(self.s_ignorexml, None),
 #       (STYLENS, "header"):(self.s_style_header, self.e_style_header),
 #       (STYLENS, "header-footer-properties"):(self.s_style_handle_properties, None),
 #       (STYLENS, "header-style"):(self.s_style_header_style, None),
-        (STYLENS, "master-page"):(self.s_style_master_page, None),
+        (STYLENS, "main-page"):(self.s_style_main_page, None),
         (STYLENS, "page-layout-properties"):(self.s_style_handle_properties, None),
         (STYLENS, "page-layout"):(self.s_style_page_layout, self.e_style_page_layout),
 #       (STYLENS, "page-layout"):(self.s_ignorexml, None),
@@ -760,10 +760,10 @@ class ODF2XHTML(handler.ContentHandler):
         name = attrs.get( (DRAWNS,'name'), "NoName")
         stylename = attrs.get( (DRAWNS,'style-name'), "")
         stylename = stylename.replace(".","_")
-        masterpage = attrs.get( (DRAWNS,'master-page-name'),"")
-        masterpage = masterpage.replace(".","_")
+        mainpage = attrs.get( (DRAWNS,'main-page-name'),"")
+        mainpage = mainpage.replace(".","_")
         if self.generate_css:
-            self.opentag('fieldset', {'class':"DP-%s MP-%s" % (stylename, masterpage) })
+            self.opentag('fieldset', {'class':"DP-%s MP-%s" % (stylename, mainpage) })
         else:
             self.opentag('fieldset')
         self.opentag('legend')
@@ -871,7 +871,7 @@ ol, ul { padding-left: 2em; }
         """ Last tag """
         self.closetag('html')
 
-    def s_office_master_styles(self, tag, attrs):
+    def s_office_main_styles(self, tag, attrs):
         """ """
 
     def s_office_presentation(self, tag, attrs):
@@ -994,7 +994,7 @@ ol, ul { padding-left: 2em; }
         """
         self.currentstyle = None
 
-    def s_style_master_page(self, tag, attrs):
+    def s_style_main_page(self, tag, attrs):
         """ Collect the formatting for the page layout style.
         """
         name = attrs[(STYLENS,'name')]
@@ -1516,7 +1516,7 @@ class ODF2XHTMLembedded(ODF2XHTML):
 #        (OFFICENS, "automatic-styles"):(self.s_office_automatic_styles, None),
 #        (OFFICENS, "document-content"):(self.s_office_document_content, self.e_office_document_content),
         (OFFICENS, "forms"):(self.s_ignorexml, None),
-#        (OFFICENS, "master-styles"):(self.s_office_master_styles, None),
+#        (OFFICENS, "main-styles"):(self.s_office_main_styles, None),
         (OFFICENS, "meta"):(self.s_ignorecont, None),
 #        (OFFICENS, "presentation"):(self.s_office_presentation, self.e_office_presentation),
 #        (OFFICENS, "spreadsheet"):(self.s_office_spreadsheet, self.e_office_spreadsheet),
@@ -1532,11 +1532,11 @@ class ODF2XHTMLembedded(ODF2XHTML):
 ##       (STYLENS, "footer"):(self.s_style_footer, self.e_style_footer),
 ##       (STYLENS, "footer-style"):(self.s_style_footer_style, None),
 #        (STYLENS, "graphic-properties"):(self.s_style_handle_properties, None),
-#        (STYLENS, "handout-master"):(self.s_ignorexml, None),
+#        (STYLENS, "handout-main"):(self.s_ignorexml, None),
 ##       (STYLENS, "header"):(self.s_style_header, self.e_style_header),
 ##       (STYLENS, "header-footer-properties"):(self.s_style_handle_properties, None),
 ##       (STYLENS, "header-style"):(self.s_style_header_style, None),
-#        (STYLENS, "master-page"):(self.s_style_master_page, None),
+#        (STYLENS, "main-page"):(self.s_style_main_page, None),
 #        (STYLENS, "page-layout-properties"):(self.s_style_handle_properties, None),
 ##       (STYLENS, "page-layout"):(self.s_style_page_layout, self.e_style_page_layout),
 #        (STYLENS, "page-layout"):(self.s_ignorexml, None),

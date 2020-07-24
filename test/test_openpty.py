@@ -9,14 +9,14 @@ if not hasattr(os, "openpty"):
 
 class OpenptyTest(unittest.TestCase):
     def test(self):
-        master, slave = os.openpty()
-        self.addCleanup(os.close, master)
-        self.addCleanup(os.close, slave)
-        if not os.isatty(slave):
-            self.fail("Slave-end of pty is not a terminal.")
+        main, subordinate = os.openpty()
+        self.addCleanup(os.close, main)
+        self.addCleanup(os.close, subordinate)
+        if not os.isatty(subordinate):
+            self.fail("Subordinate-end of pty is not a terminal.")
 
-        os.write(slave, 'Ping!')
-        self.assertEqual(os.read(master, 1024), 'Ping!')
+        os.write(subordinate, 'Ping!')
+        self.assertEqual(os.read(main, 1024), 'Ping!')
 
 def test_main():
     run_unittest(OpenptyTest)

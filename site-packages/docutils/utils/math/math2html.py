@@ -114,7 +114,7 @@ class BibStylesConfig(object):
       u'@incollection':u'$authors: <i>$title</i>{ in <i>$booktitle</i>{ ($editor, ed.)}}.{{ $publisher,} $year.}{ URL <a href="$url">$url</a>.}{ $note.}', 
       u'@inproceedings':u'$authors: “$title”, <i>$journal</i>,{ pp. $pages,} $year.{ URL <a href="$url">$url</a>.}{ $note.}', 
       u'@manual':u'$authors: <i>$title</i>.{{ $publisher,} $year.}{ URL <a href="$url">$url</a>.}{ $note.}', 
-      u'@mastersthesis':u'$authors: <i>$title</i>.{{ $publisher,} $year.}{ URL <a href="$url">$url</a>.}{ $note.}', 
+      u'@mainsthesis':u'$authors: <i>$title</i>.{{ $publisher,} $year.}{ URL <a href="$url">$url</a>.}{ $note.}', 
       u'@misc':u'$authors: <i>$title</i>.{{ $publisher,}{ $howpublished,} $year.}{ URL <a href="$url">$url</a>.}{ $note.}', 
       u'@phdthesis':u'$authors: <i>$title</i>.{{ $publisher,} $year.}{ URL <a href="$url">$url</a>.}{ $note.}', 
       u'@proceedings':u'$authors: “$title”, <i>$journal</i>,{ pp. $pages,} $year.{ URL <a href="$url">$url</a>.}{ $note.}', 
@@ -3074,7 +3074,7 @@ class NumberCounter(object):
   name = None
   value = None
   mode = None
-  master = None
+  main = None
 
   letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   symbols = NumberingConfig.sequence['symbols']
@@ -3157,25 +3157,25 @@ class NumberCounter(object):
     return result
 
 class DependentCounter(NumberCounter):
-  "A counter which depends on another one (the master)."
+  "A counter which depends on another one (the main)."
 
-  def setmaster(self, master):
-    "Set the master counter."
-    self.master = master
-    self.last = self.master.getvalue()
+  def setmain(self, main):
+    "Set the main counter."
+    self.main = main
+    self.last = self.main.getvalue()
     return self
 
   def getnext(self):
-    "Increase or, if the master counter has changed, restart."
-    if self.last != self.master.getvalue():
+    "Increase or, if the main counter has changed, restart."
+    if self.last != self.main.getvalue():
       self.reset()
     value = NumberCounter.getnext(self)
-    self.last = self.master.getvalue()
+    self.last = self.main.getvalue()
     return value
 
   def getvalue(self):
-    "Get the value of the combined counter: master.dependent."
-    return self.master.getvalue() + '.' + NumberCounter.getvalue(self)
+    "Get the value of the combined counter: main.dependent."
+    return self.main.getvalue() + '.' + NumberCounter.getvalue(self)
 
 class NumberGenerator(object):
   "A number generator for unique sequences and hierarchical structures. Used in:"
@@ -3263,22 +3263,22 @@ class NumberGenerator(object):
     if self.isnumbered(type) and self.getlevel(type) > 1:
       index = self.orderedlayouts.index(type)
       above = self.orderedlayouts[index - 1]
-      master = self.getcounter(above)
-      return self.createdependent(type, master)
+      main = self.getcounter(above)
+      return self.createdependent(type, main)
     counter = NumberCounter(type)
     if self.isroman(type):
       counter.setmode('I')
     return counter
 
-  def getdependentcounter(self, type, master):
+  def getdependentcounter(self, type, main):
     "Get (or create) a counter of the given type that depends on another."
-    if not type in self.counters or not self.counters[type].master:
-      self.counters[type] = self.createdependent(type, master)
+    if not type in self.counters or not self.counters[type].main:
+      self.counters[type] = self.createdependent(type, main)
     return self.counters[type]
 
-  def createdependent(self, type, master):
-    "Create a dependent counter given the master."
-    return DependentCounter(type).setmaster(master)
+  def createdependent(self, type, main):
+    "Create a dependent counter given the main."
+    return DependentCounter(type).setmain(main)
 
   def startappendix(self):
     "Start appendices here."

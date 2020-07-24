@@ -22,7 +22,7 @@ class FileList:
             tkMessageBox.showerror(
                 "File Error",
                 "%r is a directory." % (filename,),
-                master=self.root)
+                main=self.root)
             return None
         key = os.path.normcase(filename)
         if key in self.dict:
@@ -85,7 +85,7 @@ class FileList:
             tkMessageBox.showerror(
                 "Name Conflict",
                 "You now have multiple edit windows open for %r" % (filename,),
-                master=self.root)
+                main=self.root)
         self.dict[newkey] = edit
         self.inversedict[edit] = newkey
         if key:

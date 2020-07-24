@@ -53,8 +53,8 @@ class StoreTest(unittest.TestCase):
 
 
 class TextWrapper:
-    def __init__(self, master):
-        self.text = tkText(master=master)
+    def __init__(self, main):
+        self.text = tkText(main=main)
         self._bell = False
     def __getattr__(self, name):
         return getattr(self.text, name)

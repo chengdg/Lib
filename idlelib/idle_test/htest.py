@@ -1,7 +1,7 @@
 '''Run human tests of Idle's window, dialog, and popup widgets.
 
 run(*tests)
-Create a master Tk window.  Within that, run each callable in tests
+Create a main Tk window.  Within that, run each callable in tests
 after finding the matching test spec in this file.  If tests is empty,
 run an htest for each spec dict in this file after finding the matching
 callable in the module named in the spec.  Close the window to skip or
@@ -55,7 +55,7 @@ _spec = {
 file (no .py): run() imports file.py.
 kwds: augmented with {'parent':root} and passed to X as **kwds.
 title: an example kwd; some widgets need this, delete if not.
-msg: master window hints about testing the widget.
+msg: main window hints about testing the widget.
 
 
 Modules and classes not being tested at the moment:

@@ -47,7 +47,7 @@ class Dialog(Toplevel):
         Toplevel.__init__(self, parent)
 
         self.withdraw() # remain invisible for now
-        # If the master is not viewable, don't
+        # If the main is not viewable, don't
         # make the child transient, or else it
         # would be opened withdrawn
         if parent.winfo_viewable():
@@ -93,7 +93,7 @@ class Dialog(Toplevel):
     #
     # construction hooks
 
-    def body(self, master):
+    def body(self, main):
         '''create dialog body.
 
         return widget that should have initial focus.
@@ -192,12 +192,12 @@ class _QueryDialog(Dialog):
         self.entry = None
         Dialog.destroy(self)
 
-    def body(self, master):
+    def body(self, main):
 
-        w = Label(master, text=self.prompt, justify=LEFT)
+        w = Label(main, text=self.prompt, justify=LEFT)
         w.grid(row=0, padx=5, sticky=W)
 
-        self.entry = Entry(master, name="entry")
+        self.entry = Entry(main, name="entry")
         self.entry.grid(row=1, padx=5, sticky=W+E)
 
         if self.initialvalue is not None:
@@ -290,8 +290,8 @@ class _QueryString(_QueryDialog):
             self.__show = None
         _QueryDialog.__init__(self, *args, **kw)
 
-    def body(self, master):
-        entry = _QueryDialog.body(self, master)
+    def body(self, main):
+        entry = _QueryDialog.body(self, main)
         if self.__show is not None:
             entry.configure(show=self.__show)
         return entry

@@ -228,8 +228,8 @@ class FormatClassTest(unittest.TestCase):
 # other problems (windows left open).
 
 class TextWrapper:
-    def __init__(self, master):
-        self.text = Text(master=master)
+    def __init__(self, main):
+        self.text = Text(main=main)
     def __getattr__(self, name):
         return getattr(self.text, name)
     def undo_block_start(self): pass

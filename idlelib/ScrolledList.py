@@ -4,10 +4,10 @@ class ScrolledList:
 
     default = "(None)"
 
-    def __init__(self, master, **options):
+    def __init__(self, main, **options):
         # Create top frame, with scrollbar and listbox
-        self.master = master
-        self.frame = frame = Frame(master)
+        self.main = main
+        self.frame = frame = Frame(main)
         self.frame.pack(fill="both", expand=1)
         self.vbar = vbar = Scrollbar(frame, name="vbar")
         self.vbar.pack(side="right", fill="y")

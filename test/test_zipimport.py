@@ -335,14 +335,14 @@ class UncompressedZipImportTestCase(ImportHooksBaseTestCase):
 
     def doDoctestFile(self, module):
         log = []
-        old_master, doctest.master = doctest.master, None
+        old_main, doctest.main = doctest.main, None
         try:
             doctest.testfile(
                 'xyz.txt', package=module, module_relative=True,
                 globs=locals()
             )
         finally:
-            doctest.master = old_master
+            doctest.main = old_main
         self.assertEqual(log,[True])
 
     def testDoctestFile(self):

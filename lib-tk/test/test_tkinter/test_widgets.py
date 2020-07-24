@@ -265,7 +265,7 @@ class MenubuttonTest(AbstractLabelTest, unittest.TestCase):
                      'crashes with Cocoa Tk (issue19733)')
     def test_image(self):
         widget = self.create()
-        image = tkinter.PhotoImage(master=self.root, name='image1')
+        image = tkinter.PhotoImage(main=self.root, name='image1')
         self.checkParam(widget, 'image', image, conv=str)
         errmsg = 'image "spam" doesn\'t exist'
         with self.assertRaises(tkinter.TclError) as cm:

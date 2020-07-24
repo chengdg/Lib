@@ -1,6 +1,6 @@
 """Classes that replace tkinter gui objects used by an object being tested.
 
-A gui object is anything with a master or parent paramenter, which is
+A gui object is anything with a main or parent paramenter, which is
 typically required in spite of what the doc strings say.
 """
 
@@ -24,8 +24,8 @@ class Event(object):
 
 class Var(object):
     "Use for String/Int/BooleanVar: incomplete"
-    def __init__(self, master=None, value=None, name=None):
-        self.master = master
+    def __init__(self, main=None, value=None, name=None):
+        self.main = main
         self.value = value
         self.name = name
     def set(self, value):
@@ -100,7 +100,7 @@ class Text(object):
     For testing, we are not concerned with Tk Text's treatment of,
     for instance, 0-width characters or character + accent.
    """
-    def __init__(self, master=None, cnf={}, **kw):
+    def __init__(self, main=None, cnf={}, **kw):
         '''Initialize mock, non-gui, text-only Text widget.
 
         At present, all args are ignored. Almost all affect visual behavior.

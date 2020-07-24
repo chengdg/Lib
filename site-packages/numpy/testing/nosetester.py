@@ -164,7 +164,7 @@ class NoseTester(object):
     Notes
     -----
     The default for `raise_warnings` is
-    ``(DeprecationWarning, RuntimeWarning)`` for the master branch of NumPy,
+    ``(DeprecationWarning, RuntimeWarning)`` for the main branch of NumPy,
     and ``()`` for maintenance branches and released versions.  The purpose
     of this switching behavior is to catch as many warnings as possible
     during development, but not give problems for packaging of released
@@ -393,7 +393,7 @@ class NoseTester(object):
 
         # reset doctest state on every run
         import doctest
-        doctest.master = None
+        doctest.main = None
 
         if raise_warnings is None:
             raise_warnings = self.raise_warnings

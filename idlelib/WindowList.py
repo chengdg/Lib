@@ -57,8 +57,8 @@ unregister_callback = registry.unregister_callback
 
 class ListedToplevel(Toplevel):
 
-    def __init__(self, master, **kw):
-        Toplevel.__init__(self, master, kw)
+    def __init__(self, main, **kw):
+        Toplevel.__init__(self, main, kw)
         registry.add(self)
         self.focused_widget = self
 

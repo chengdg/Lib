@@ -66,54 +66,54 @@ class PtyTest(unittest.TestCase):
 
     def test_basic(self):
         try:
-            debug("Calling master_open()")
-            master_fd, slave_name = pty.master_open()
-            debug("Got master_fd '%d', slave_name '%s'" %
-                  (master_fd, slave_name))
-            debug("Calling slave_open(%r)" % (slave_name,))
-            slave_fd = pty.slave_open(slave_name)
-            debug("Got slave_fd '%d'" % slave_fd)
+            debug("Calling main_open()")
+            main_fd, subordinate_name = pty.main_open()
+            debug("Got main_fd '%d', subordinate_name '%s'" %
+                  (main_fd, subordinate_name))
+            debug("Calling subordinate_open(%r)" % (subordinate_name,))
+            subordinate_fd = pty.subordinate_open(subordinate_name)
+            debug("Got subordinate_fd '%d'" % subordinate_fd)
         except OSError:
             # " An optional feature could not be imported " ... ?
             raise unittest.SkipTest, "Pseudo-terminals (seemingly) not functional."
 
-        self.assertTrue(os.isatty(slave_fd), 'slave_fd is not a tty')
+        self.assertTrue(os.isatty(subordinate_fd), 'subordinate_fd is not a tty')
 
         # Solaris requires reading the fd before anything is returned.
-        # My guess is that since we open and close the slave fd
-        # in master_open(), we need to read the EOF.
+        # My guess is that since we open and close the subordinate fd
+        # in main_open(), we need to read the EOF.
 
         # Ensure the fd is non-blocking in case there's nothing to read.
-        orig_flags = fcntl.fcntl(master_fd, fcntl.F_GETFL)
-        fcntl.fcntl(master_fd, fcntl.F_SETFL, orig_flags | os.O_NONBLOCK)
+        orig_flags = fcntl.fcntl(main_fd, fcntl.F_GETFL)
+        fcntl.fcntl(main_fd, fcntl.F_SETFL, orig_flags | os.O_NONBLOCK)
         try:
-            s1 = os.read(master_fd, 1024)
+            s1 = os.read(main_fd, 1024)
             self.assertEqual('', s1)
         except OSError, e:
             if e.errno != errno.EAGAIN:
                 raise
         # Restore the original flags.
-        fcntl.fcntl(master_fd, fcntl.F_SETFL, orig_flags)
+        fcntl.fcntl(main_fd, fcntl.F_SETFL, orig_flags)
 
-        debug("Writing to slave_fd")
-        os.write(slave_fd, TEST_STRING_1)
-        s1 = os.read(master_fd, 1024)
+        debug("Writing to subordinate_fd")
+        os.write(subordinate_fd, TEST_STRING_1)
+        s1 = os.read(main_fd, 1024)
         self.assertEqual('I wish to buy a fish license.\n',
                          normalize_output(s1))
 
         debug("Writing chunked output")
-        os.write(slave_fd, TEST_STRING_2[:5])
-        os.write(slave_fd, TEST_STRING_2[5:])
-        s2 = os.read(master_fd, 1024)
+        os.write(subordinate_fd, TEST_STRING_2[:5])
+        os.write(subordinate_fd, TEST_STRING_2[5:])
+        s2 = os.read(main_fd, 1024)
         self.assertEqual('For my pet fish, Eric.\n', normalize_output(s2))
 
-        os.close(slave_fd)
-        os.close(master_fd)
+        os.close(subordinate_fd)
+        os.close(main_fd)
 
 
     def test_fork(self):
         debug("calling pty.fork()")
-        pid, master_fd = pty.fork()
+        pid, main_fd = pty.fork()
         if pid == pty.CHILD:
             # stdout should be connected to a tty.
             if not os.isatty(1):
@@ -158,14 +158,14 @@ class PtyTest(unittest.TestCase):
             # worth checking for EIO.
             while True:
                 try:
-                    data = os.read(master_fd, 80)
+                    data = os.read(main_fd, 80)
                 except OSError:
                     break
                 if not data:
                     break
                 sys.stdout.write(data.replace('\r\n', '\n'))
 
-            ##line = os.read(master_fd, 80)
+            ##line = os.read(main_fd, 80)
             ##lines = line.replace('\r\n', '\n').split('\n')
             ##if False and lines != ['In child, calling os.setsid()',
             ##             'Good: OSError was raised.', '']:
@@ -183,15 +183,15 @@ class PtyTest(unittest.TestCase):
             elif res != 4:
                 self.fail("pty.fork() failed for unknown reasons.")
 
-            ##debug("Reading from master_fd now that the child has exited")
+            ##debug("Reading from main_fd now that the child has exited")
             ##try:
-            ##    s1 = os.read(master_fd, 1024)
+            ##    s1 = os.read(main_fd, 1024)
             ##except os.error:
             ##    pass
             ##else:
-            ##    raise TestFailed("Read from master_fd did not raise exception")
+            ##    raise TestFailed("Read from main_fd did not raise exception")
 
-        os.close(master_fd)
+        os.close(main_fd)
 
         # pty.fork() passed.
 
@@ -228,58 +228,58 @@ class SmallPtyTests(unittest.TestCase):
         return self.select_rfds_results.pop(0), [], []
 
     def test__copy_to_each(self):
-        """Test the normal data case on both master_fd and stdin."""
+        """Test the normal data case on both main_fd and stdin."""
         read_from_stdout_fd, mock_stdout_fd = self._pipe()
         pty.STDOUT_FILENO = mock_stdout_fd
         mock_stdin_fd, write_to_stdin_fd = self._pipe()
         pty.STDIN_FILENO = mock_stdin_fd
         socketpair = socket.socketpair()
-        masters = [s.fileno() for s in socketpair]
-        self.fds.extend(masters)
+        mains = [s.fileno() for s in socketpair]
+        self.fds.extend(mains)
 
         # Feed data.  Smaller than PIPEBUF.  These writes will not block.
-        os.write(masters[1], b'from master')
+        os.write(mains[1], b'from main')
         os.write(write_to_stdin_fd, b'from stdin')
 
         # Expect two select calls, the last one will cause IndexError
         pty.select = self._mock_select
         self.select_rfds_lengths.append(2)
-        self.select_rfds_results.append([mock_stdin_fd, masters[0]])
+        self.select_rfds_results.append([mock_stdin_fd, mains[0]])
         self.select_rfds_lengths.append(2)
 
         with self.assertRaises(IndexError):
-            pty._copy(masters[0])
+            pty._copy(mains[0])
 
         # Test that the right data went to the right places.
-        rfds = select.select([read_from_stdout_fd, masters[1]], [], [], 0)[0]
-        self.assertEqual([read_from_stdout_fd, masters[1]], rfds)
-        self.assertEqual(os.read(read_from_stdout_fd, 20), b'from master')
-        self.assertEqual(os.read(masters[1], 20), b'from stdin')
+        rfds = select.select([read_from_stdout_fd, mains[1]], [], [], 0)[0]
+        self.assertEqual([read_from_stdout_fd, mains[1]], rfds)
+        self.assertEqual(os.read(read_from_stdout_fd, 20), b'from main')
+        self.assertEqual(os.read(mains[1], 20), b'from stdin')
 
     def test__copy_eof_on_all(self):
-        """Test the empty read EOF case on both master_fd and stdin."""
+        """Test the empty read EOF case on both main_fd and stdin."""
         read_from_stdout_fd, mock_stdout_fd = self._pipe()
         pty.STDOUT_FILENO = mock_stdout_fd
         mock_stdin_fd, write_to_stdin_fd = self._pipe()
         pty.STDIN_FILENO = mock_stdin_fd
         socketpair = socket.socketpair()
-        masters = [s.fileno() for s in socketpair]
-        self.fds.extend(masters)
+        mains = [s.fileno() for s in socketpair]
+        self.fds.extend(mains)
 
-        os.close(masters[1])
+        os.close(mains[1])
         socketpair[1].close()
         os.close(write_to_stdin_fd)
 
         # Expect two select calls, the last one will cause IndexError
         pty.select = self._mock_select
         self.select_rfds_lengths.append(2)
-        self.select_rfds_results.append([mock_stdin_fd, masters[0]])
+        self.select_rfds_results.append([mock_stdin_fd, mains[0]])
         # We expect that both fds were removed from the fds list as they
         # both encountered an EOF before the second select call.
         self.select_rfds_lengths.append(0)
 
         with self.assertRaises(IndexError):
-            pty._copy(masters[0])
+            pty._copy(mains[0])
 
 
 def test_main(verbose=None):

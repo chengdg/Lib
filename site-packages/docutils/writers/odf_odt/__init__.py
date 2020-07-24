@@ -980,7 +980,7 @@ class ODFTranslator(nodes.GenericNodeVisitor):
         el1 = SubElement(
             self.automatic_styles, 'style:style', attrib={
                 'style:name': style_name,
-                'style:master-page-name': "rststyle-pagedefault",
+                'style:main-page-name': "rststyle-pagedefault",
                 'style:family': "paragraph",
                 }, nsdict=SNSD)
         if current_style:
@@ -1035,22 +1035,22 @@ class ODFTranslator(nodes.GenericNodeVisitor):
     def add_header_footer(self, root_el):
         automatic_styles = root_el.find(
             '{%s}automatic-styles' % SNSD['office'])
-        path = '{%s}master-styles' % (NAME_SPACE_1, )
-        master_el = root_el.find(path)
-        if master_el is None:
+        path = '{%s}main-styles' % (NAME_SPACE_1, )
+        main_el = root_el.find(path)
+        if main_el is None:
             return
-        path = '{%s}master-page' % (SNSD['style'], )
-        master_el_container = master_el.findall(path)
-        master_el = None
+        path = '{%s}main-page' % (SNSD['style'], )
+        main_el_container = main_el.findall(path)
+        main_el = None
         target_attrib = '{%s}name' % (SNSD['style'], )
         target_name = self.rststyle('pagedefault')
-        for el in master_el_container:
+        for el in main_el_container:
             if el.get(target_attrib) == target_name:
-                master_el = el
+                main_el = el
                 break
-        if master_el is None:
+        if main_el is None:
             return
-        el1 = master_el
+        el1 = main_el
         if self.header_content or self.settings.custom_header:
             if WhichElementTree == 'lxml':
                 el2 = SubElement(el1, 'style:header', nsdict=SNSD)

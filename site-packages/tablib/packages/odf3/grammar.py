@@ -912,7 +912,7 @@ allowed_children = {
 		(OFFICENS,'automatic-styles'),
 		(OFFICENS,'body'),
 		(OFFICENS,'font-face-decls'),
-		(OFFICENS,'master-styles'),
+		(OFFICENS,'main-styles'),
 		(OFFICENS,'meta'),
 		(OFFICENS,'scripts'),
 		(OFFICENS,'settings'),
@@ -933,7 +933,7 @@ allowed_children = {
 	(OFFICENS,'document-styles') : (
 		(OFFICENS,'automatic-styles'),
 		(OFFICENS,'font-face-decls'),
-		(OFFICENS,'master-styles'),
+		(OFFICENS,'main-styles'),
 		(OFFICENS,'styles'),
 	),
 	(OFFICENS,'drawing') : (
@@ -967,10 +967,10 @@ allowed_children = {
 	(OFFICENS,'image') : (
 		(DRAWNS,'frame'),
 	),
-	(OFFICENS,'master-styles') : (
+	(OFFICENS,'main-styles') : (
 		(DRAWNS,'layer-set'),
-		(STYLENS,'handout-master'),
-		(STYLENS,'master-page'),
+		(STYLENS,'handout-main'),
+		(STYLENS,'main-page'),
 		(TABLENS,'table-template'),
 	),
 	(OFFICENS,'meta') : (
@@ -1313,7 +1313,7 @@ allowed_children = {
 		(TEXTNS,'list-style'),
 	),
 # allowed_children
-	(STYLENS,'handout-master') : (
+	(STYLENS,'handout-main') : (
 		(DR3DNS,'scene'),
 		(DRAWNS,'caption'),
 		(DRAWNS,'circle'),
@@ -1397,7 +1397,7 @@ allowed_children = {
 	),
 	(STYLENS,'map') : (
 	),
-	(STYLENS,'master-page') : (
+	(STYLENS,'main-page') : (
 		(DR3DNS,'scene'),
 		(DRAWNS,'caption'),
 		(DRAWNS,'circle'),
@@ -3543,7 +3543,7 @@ required_attributes = {
 		(DRAWNS,'style'),
 	),
 	(DRAWNS,'page'): (
-		(DRAWNS,'master-page-name'),
+		(DRAWNS,'main-page-name'),
 	),
 	(DRAWNS,'path'): (
 		(SVGNS,'d'),
@@ -3743,14 +3743,14 @@ required_attributes = {
 	(STYLENS,'font-face'): (
 		(STYLENS,'name'),
 	),
-	(STYLENS,'handout-master'): (
+	(STYLENS,'handout-main'): (
 		(STYLENS,'page-layout-name'),
 	),
 	(STYLENS,'map'): (
 		(STYLENS,'apply-style-name'),
 		(STYLENS,'condition'),
 	),
-	(STYLENS,'master-page'): (
+	(STYLENS,'main-page'): (
 		(STYLENS,'page-layout-name'),
 		(STYLENS,'name'),
 	),
@@ -4119,7 +4119,7 @@ required_attributes = {
 		(TEXTNS,'level'),
 	),
 	(TEXTNS,'page'): (
-		(TEXTNS,'master-page-name'),
+		(TEXTNS,'main-page-name'),
 	),
 	(TEXTNS,'page-continuation'): (
 		(TEXTNS,'select-page'),
@@ -4379,7 +4379,7 @@ allowed_attributes = {
 		(ANIMNS,'audio-level'),
 		(ANIMNS,'id'),
 		(PRESENTATIONNS,'group-id'),
-		(PRESENTATIONNS,'master-element'),
+		(PRESENTATIONNS,'main-element'),
 		(PRESENTATIONNS,'node-type'),
 		(PRESENTATIONNS,'preset-class'),
 		(PRESENTATIONNS,'preset-id'),
@@ -4403,7 +4403,7 @@ allowed_attributes = {
 		(PRESENTATIONNS,'preset-sub-type'),
 		(SMILNS,'targetElement'),
 		(ANIMNS,'id'),
-		(PRESENTATIONNS,'master-element'),
+		(PRESENTATIONNS,'main-element'),
 	),
 # allowed_attributes
 	(ANIMNS,'iterate'):(
@@ -4412,7 +4412,7 @@ allowed_attributes = {
 		(ANIMNS,'iterate-type'),
 		(ANIMNS,'sub-item'),
 		(PRESENTATIONNS,'group-id'),
-		(PRESENTATIONNS,'master-element'),
+		(PRESENTATIONNS,'main-element'),
 		(PRESENTATIONNS,'node-type'),
 		(PRESENTATIONNS,'preset-class'),
 		(PRESENTATIONNS,'preset-id'),
@@ -4452,7 +4452,7 @@ allowed_attributes = {
 		(SMILNS,'fill'),
 		(ANIMNS,'id'),
 		(SMILNS,'restart'),
-		(PRESENTATIONNS,'master-element'),
+		(PRESENTATIONNS,'main-element'),
 	),
 # allowed_attributes
 	(ANIMNS,'param'):(
@@ -4462,7 +4462,7 @@ allowed_attributes = {
 	(ANIMNS,'seq'):(
 		(ANIMNS,'id'),
 		(PRESENTATIONNS,'group-id'),
-		(PRESENTATIONNS,'master-element'),
+		(PRESENTATIONNS,'main-element'),
 		(PRESENTATIONNS,'node-type'),
 		(PRESENTATIONNS,'preset-class'),
 		(PRESENTATIONNS,'preset-id'),
@@ -5408,7 +5408,7 @@ allowed_attributes = {
 		(PRESENTATIONNS,'use-footer-name'),
 		(DRAWNS,'style-name'),
 		(PRESENTATIONNS,'use-header-name'),
-		(DRAWNS,'master-page-name'),
+		(DRAWNS,'main-page-name'),
 		(DRAWNS,'id'),
 		(PRESENTATIONNS,'use-date-time-name'),
 	),
@@ -5730,7 +5730,7 @@ allowed_attributes = {
 		(OFFICENS,'target-frame'),
 		(FORMNS,'navigation-mode'),
 		(FORMNS,'detail-fields'),
-		(FORMNS,'master-fields'),
+		(FORMNS,'main-fields'),
 		(FORMNS,'allow-updates'),
 		(FORMNS,'name'),
 		(FORMNS,'tab-cycle'),
@@ -6152,7 +6152,7 @@ allowed_attributes = {
 	(OFFICENS,'image'):(
 	),
 # allowed_attributes
-	(OFFICENS,'master-styles'):(
+	(OFFICENS,'main-styles'):(
 	),
 	(OFFICENS,'meta'):(
 	),
@@ -6665,7 +6665,7 @@ allowed_attributes = {
 		(TEXTNS,'animation-steps'),
 		(TEXTNS,'animation-stop-inside'),
 	),
-	(STYLENS,'handout-master'):(
+	(STYLENS,'handout-main'):(
 		(PRESENTATIONNS,'presentation-page-layout-name'),
 		(STYLENS,'page-layout-name'),
 		(PRESENTATIONNS,'use-footer-name'),
@@ -6727,7 +6727,7 @@ allowed_attributes = {
 		(STYLENS,'base-cell-address'),
 		(STYLENS,'condition'),
 	),
-	(STYLENS,'master-page'):(
+	(STYLENS,'main-page'):(
 		(STYLENS,'page-layout-name'),
 		(STYLENS,'display-name'),
 		(DRAWNS,'style-name'),
@@ -6875,7 +6875,7 @@ allowed_attributes = {
 		(STYLENS,'class'),
 		(STYLENS,'next-style-name'),
 		(STYLENS,'data-style-name'),
-		(STYLENS,'master-page-name'),
+		(STYLENS,'main-page-name'),
 		(STYLENS,'display-name'),
 		(STYLENS,'parent-style-name'),
 	),
@@ -8035,7 +8035,7 @@ allowed_attributes = {
 		(STYLENS,'num-letter-sync'),
 		(TEXTNS,'citation-style-name'),
 		(TEXTNS,'footnotes-position'),
-		(TEXTNS,'master-page-name'),
+		(TEXTNS,'main-page-name'),
 		(TEXTNS,'start-value'),
 		(TEXTNS,'note-class'),
 	),
@@ -8089,7 +8089,7 @@ allowed_attributes = {
 		(TEXTNS,'id'),
 	),
 	(TEXTNS,'page'):(
-		(TEXTNS,'master-page-name'),
+		(TEXTNS,'main-page-name'),
 	),
 	(TEXTNS,'page-continuation'):(
 		(TEXTNS,'string-value'),
